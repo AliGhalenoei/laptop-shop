@@ -137,6 +137,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # CORS
 CORS_ALLOW_ALL_ORIGINS = True
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+CORS_ALLOW_CREDENTIALS = True
 
 # Gmail...
 EMAIL_BACKEND='django.core.mail.backends.smtp.EmailBackend'
