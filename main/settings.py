@@ -44,10 +44,12 @@ INSTALLED_APPS = [
     "corsheaders",
     "rest_framework",
     "drf_spectacular",
+    "django_ckeditor_5",
     'rest_framework_simplejwt.token_blacklist',
 
     # projects apps
     "accounts.apps.AccountsConfig",
+    "products.apps.ProductsConfig",
 ]
 
 MIDDLEWARE = [
@@ -134,10 +136,42 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+######
+# SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+# SECURE_BROWSER_XSS_FILTER = True
+# SECURE_CONTENT_TYPE_NOSNIFF = True
+# X_FRAME_OPTIONS = 'DENY'
+
+# CSRF_COOKIE_SAMESITE = 'Lax'  
+# CSRF_COOKIE_HTTPONLY = False
+# CSRF_COOKIE_SECURE = False 
+# CSRF_TRUSTED_ORIGINS = [
+#     'http://localhost:3000', 
+# ]
+
+# CORS_ALLOW_CREDENTIALS = True
+# CORS_EXPOSE_HEADERS = ['Content-Type', 'X-CSRFToken']
+
+# CORS_ALLOWED_ORIGINS = []
+# CORS_ALLOW_ALL_ORIGINS = True
+
+# SESSION_COOKIE_SAMESITE = 'Lax'
+# SESSION_COOKIE_HTTPONLY = False
+# SESSION_COOKIE_SECURE = False  
+
 # CORS
 CORS_ALLOW_ALL_ORIGINS = True
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 CORS_ALLOW_CREDENTIALS = True
+
+# ARVAN CLOUD STORAGE
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+AWS_ACCESS_KEY_ID = '47456b6b-46f1-4e29-a1d9-43238c6823f4'
+AWS_SECRET_ACCESS_KEY = '4715f206369ae6ba5f03e0ca08e4af622ffc0657'
+AWS_S3_ENDPOINT_URL = 'https://s3.ir-thr-at1.arvanstorage.com'
+AWS_STORAGE_BUCKET_NAME ='dj-vod'
+AWS_SERVICE_NAME = 's3'
+AWS_S3_FILE_OVERWRITE = False
 
 # Gmail...
 EMAIL_BACKEND='django.core.mail.backends.smtp.EmailBackend'
@@ -203,6 +237,61 @@ SIMPLE_JWT = {
     "TOKEN_BLACKLIST_SERIALIZER": "rest_framework_simplejwt.serializers.TokenBlacklistSerializer",
     "SLIDING_TOKEN_OBTAIN_SERIALIZER": "rest_framework_simplejwt.serializers.TokenObtainSlidingSerializer",
     "SLIDING_TOKEN_REFRESH_SERIALIZER": "rest_framework_simplejwt.serializers.TokenRefreshSlidingSerializer",
+}
+
+CKEDITOR_5_CONFIGS = {
+    'default': {
+        'toolbar': {
+            'items': ['heading', '|', 'bold', 'italic', 'link',
+                      'bulletedList', 'numberedList', 'blockQuote', 'imageUpload', ],
+                    }
+
+    },
+    'extends': {
+        'blockToolbar': [
+            'paragraph', 'heading1', 'heading2', 'heading3',
+            '|',
+            'bulletedList', 'numberedList',
+            '|',
+            'blockQuote',
+        ],
+        'toolbar': {
+            'items': ['heading', '|', 'outdent', 'indent', '|', 'bold', 'italic', 'link', 'underline', 'strikethrough',
+                      'code','subscript', 'superscript', 'highlight', '|', 'codeBlock', 'sourceEditing', 'insertImage',
+                    'bulletedList', 'numberedList', 'todoList', '|',  'blockQuote', 'imageUpload', '|',
+                    'fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor', 'mediaEmbed', 'removeFormat',
+                    'insertTable',
+                    ],
+            'shouldNotGroupWhenFull': 'true'
+        },
+        'image': {
+            'toolbar': ['imageTextAlternative', '|', 'imageStyle:alignLeft',
+                        'imageStyle:alignRight', 'imageStyle:alignCenter', 'imageStyle:side',  '|'],
+            'styles': [
+                'full',
+                'side',
+                'alignLeft',
+                'alignRight',
+                'alignCenter',
+            ]
+
+        },
+        'heading' : {
+            'options': [
+                { 'model': 'paragraph', 'title': 'Paragraph', 'class': 'ck-heading_paragraph' },
+                { 'model': 'heading1', 'view': 'h1', 'title': 'Heading 1', 'class': 'ck-heading_heading1' },
+                { 'model': 'heading2', 'view': 'h2', 'title': 'Heading 2', 'class': 'ck-heading_heading2' },
+                { 'model': 'heading3', 'view': 'h3', 'title': 'Heading 3', 'class': 'ck-heading_heading3' }
+            ]
+        }
+    },
+    'list': {
+        'properties': {
+            'styles': 'true',
+            'startIndex': 'true',
+            'reversed': 'true',
+        }
+    }
 }
 
 # Custom User
