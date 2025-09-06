@@ -50,6 +50,8 @@ INSTALLED_APPS = [
     # projects apps
     "accounts.apps.AccountsConfig",
     "products.apps.ProductsConfig",
+    "cart.apps.CartConfig",
+    "baners.apps.BanersConfig"
 ]
 
 MIDDLEWARE = [

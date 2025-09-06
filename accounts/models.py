@@ -26,6 +26,11 @@ class User(PermissionsMixin , AbstractBaseUser):
 
     objects = UserManager()
 
+    class Meta:
+        verbose_name = "کاربر"
+        verbose_name_plural = "کاربران"
+        
+
     def __str__(self):
         return self.username
     
@@ -44,6 +49,10 @@ class OTP(models.Model):
     phone = models.CharField(max_length=11)
     code = models.SmallIntegerField()
     created = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name = "کد پیامکی"
+        verbose_name_plural = "کد های پیامکی"
 
     def __str__(self):
         return str(self.code)
