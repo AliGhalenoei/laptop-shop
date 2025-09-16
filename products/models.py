@@ -1,5 +1,8 @@
 from django.db import models
 from django_ckeditor_5.fields import CKEditor5Field
+from django.contrib.contenttypes.fields import GenericRelation
+from comments.models import Comment
+from accounts.models import User
 # Create your models here.
 
 
@@ -38,7 +41,8 @@ class Product(models.Model):
     is_available = models.BooleanField(default=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
-
+    comments = GenericRelation(Comment)
+    
     class Meta:
         verbose_name = "محصول"
         verbose_name_plural = "محصولات"
@@ -49,7 +53,6 @@ class Product(models.Model):
     def save(self, *args, **kwargs):
         if self.sale_price and self.price > 0:
             discount_value = self.price - self.sale_price
-            print(discount_value)
             self.discount_off = round((discount_value / self.price) * 100)
         else:
             self.discount_off = 0
@@ -63,3 +66,12 @@ class GaleryProduct(models.Model):
     class Meta:
         verbose_name = "گالری محصول"
         verbose_name_plural = "گالری محصولات"
+
+
+class Bookmark(models.Model):
+    user = models.ForeignKey(User , on_delete=models.CASCADE , related_name="bookmarks")
+    product = models.ForeignKey(Product , on_delete=models.CASCADE)
+    created = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"user {self.user.username} Saves Product {self.product.title}"

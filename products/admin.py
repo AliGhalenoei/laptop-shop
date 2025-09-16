@@ -28,3 +28,5 @@ class ProductAdmin(admin.ModelAdmin):
     @mark_safe
     def show_baner(self , obj):
         return f'<img src="{obj.baner.url}" height="20px" width="30px" />'
+
+admin.site.register(Bookmark)

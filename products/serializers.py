@@ -1,12 +1,12 @@
 from rest_framework import serializers
-from .models import Category , Product , GaleryProduct
+from .models import Category , Product , GaleryProduct , Bookmark
+
 
 
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
         fields = ("id" , "title" , "slug" , "sub_category" , "is_sub")
-
 
 class GaleryProductSerializer(serializers.ModelSerializer):
     class Meta:
@@ -23,5 +23,11 @@ class ProductSerializer(serializers.ModelSerializer):
 
     def get_galery(self ,obj):
         result = obj.galerys.all()
-        print("=====",result)
         return GaleryProductSerializer(instance = result , many = True).data
+
+class BookmarkSerializer(serializers.ModelSerializer):
+    user = serializers.StringRelatedField(read_only = True)
+    product = ProductSerializer()
+    class Meta:
+        model = Bookmark
+        fields = ("user","product","created")

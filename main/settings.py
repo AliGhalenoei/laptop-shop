@@ -51,7 +51,9 @@ INSTALLED_APPS = [
     "accounts.apps.AccountsConfig",
     "products.apps.ProductsConfig",
     "cart.apps.CartConfig",
-    "baners.apps.BanersConfig"
+    "baners.apps.BanersConfig",
+    "comments.apps.CommentsConfig",
+    "siteinfo.apps.SiteinfoConfig",
 ]
 
 MIDDLEWARE = [
@@ -295,6 +297,6 @@ CKEDITOR_5_CONFIGS = {
         }
     }
 }
-
+CKEDITOR_5_FILE_UPLOAD_PERMISSION = "staff"
 # Custom User
 AUTH_USER_MODEL = "accounts.User"
